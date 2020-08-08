@@ -41,6 +41,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.CheckDotaStatusTimer = new System.Windows.Forms.Timer(this.components);
+            this.label2 = new System.Windows.Forms.Label();
+            this.Zoom = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +63,7 @@
             this.DotaStatus.AutoSize = true;
             this.DotaStatus.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.DotaStatus.ForeColor = System.Drawing.Color.Red;
-            this.DotaStatus.Location = new System.Drawing.Point(142, 22);
+            this.DotaStatus.Location = new System.Drawing.Point(121, 22);
             this.DotaStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.DotaStatus.Name = "DotaStatus";
             this.DotaStatus.Size = new System.Drawing.Size(35, 19);
@@ -72,7 +74,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(279, 22);
+            this.label3.Location = new System.Drawing.Point(202, 22);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(55, 19);
@@ -84,7 +86,7 @@
             this.Resolution.AccessibleDescription = "Resolution";
             this.Resolution.AutoSize = true;
             this.Resolution.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Resolution.Location = new System.Drawing.Point(370, 22);
+            this.Resolution.Location = new System.Drawing.Point(293, 22);
             this.Resolution.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Resolution.Name = "Resolution";
             this.Resolution.Size = new System.Drawing.Size(31, 19);
@@ -95,7 +97,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(20, 85);
+            this.label5.Location = new System.Drawing.Point(20, 69);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(55, 19);
@@ -104,7 +106,7 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(83, 85);
+            this.trackBar1.Location = new System.Drawing.Point(83, 69);
             this.trackBar1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.trackBar1.Maximum = 100;
             this.trackBar1.Name = "trackBar1";
@@ -117,7 +119,7 @@
             // 
             this.transparency.AutoSize = true;
             this.transparency.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.transparency.Location = new System.Drawing.Point(551, 85);
+            this.transparency.Location = new System.Drawing.Point(551, 69);
             this.transparency.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.transparency.Name = "transparency";
             this.transparency.Size = new System.Drawing.Size(37, 19);
@@ -153,23 +155,48 @@
             this.label8.Location = new System.Drawing.Point(20, 217);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(475, 95);
+            this.label8.Size = new System.Drawing.Size(465, 114);
             this.label8.TabIndex = 0;
-            this.label8.Text = "Tips :\r\n请使用全屏或无边框窗口全屏，在游戏界面按下指定快捷键后3秒内不要操作鼠标.\r\n截图完成后切换到直播界面粘贴即可.\r\n目前仅适配了1920*1080" +
-    "和2560*1440游戏分辨率，如果有特殊分辨率需求，可\r\n以进群联系作者.\r\n";
+            this.label8.Text = "Tips :\r\n1.确保当前目录不包含中文.\r\n2.使用全屏或无边框窗口全屏.\r\n3.在游戏界面按下快捷键后3秒内不要操作鼠标,截图完成后切换到直播界面粘贴.\r\n" +
+    "4.目前仅适配了1920*1080和2560*1440游戏分辨率,如果有特殊分辨率需求,请\r\n进群联系作者.\r\n";
             // 
             // CheckDotaStatusTimer
             // 
             this.CheckDotaStatusTimer.Tick += new System.EventHandler(this.CheckDotaStatusTimer_Tick);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(427, 22);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(68, 19);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "系统缩放 :";
+            // 
+            // Zoom
+            // 
+            this.Zoom.AccessibleDescription = "Zoom";
+            this.Zoom.AutoSize = true;
+            this.Zoom.Font = new System.Drawing.Font("Microsoft YaHei UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Zoom.Location = new System.Drawing.Point(518, 22);
+            this.Zoom.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Zoom.Name = "Zoom";
+            this.Zoom.Size = new System.Drawing.Size(45, 19);
+            this.Zoom.TabIndex = 0;
+            this.Zoom.Text = "100%";
+            // 
             // DotaSkillScreenshot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 342);
+            this.ClientSize = new System.Drawing.Size(654, 375);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.DotaStatus);
+            this.Controls.Add(this.Zoom);
             this.Controls.Add(this.Resolution);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.transparency);
             this.Controls.Add(this.label8);
@@ -204,6 +231,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Timer CheckDotaStatusTimer;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Zoom;
     }
 }
 

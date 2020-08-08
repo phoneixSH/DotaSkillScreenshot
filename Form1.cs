@@ -62,6 +62,71 @@ namespace DotaSkillScreenshot
             Absolute = 0x8000
         }
 
+        #region Win32 API
+        [DllImport("user32.dll")]
+        static extern IntPtr GetDC(IntPtr ptr);
+        [DllImport("gdi32.dll")]
+        static extern int GetDeviceCaps(
+            IntPtr hdc, // handle to DC
+            int nIndex // index of capability
+        );
+        [DllImport("user32.dll", EntryPoint = "ReleaseDC")]
+        static extern IntPtr ReleaseDC(IntPtr hWnd, IntPtr hDc);
+        #endregion
+
+        #region DeviceCaps常量
+        const int HORZRES = 8;
+        const int VERTRES = 10;
+        const int LOGPIXELSX = 88;
+        const int LOGPIXELSY = 90;
+        const int DESKTOPVERTRES = 117;
+        const int DESKTOPHORZRES = 118;
+        #endregion
+
+        #region 属性
+
+        /// 获取真实设置的桌面分辨率大小
+        /// 
+        public static Size Desktop
+        {
+            get
+            {
+                var hdc = GetDC(IntPtr.Zero);
+                var size = new Size
+                {
+                    Width = GetDeviceCaps(hdc, DESKTOPHORZRES),
+                    Height = GetDeviceCaps(hdc, DESKTOPVERTRES)
+                };
+                ReleaseDC(IntPtr.Zero, hdc);
+                return size;
+            }
+        }
+
+        /// 获取屏幕分辨率当前物理大小
+        /// 
+        public static Size WorkingArea
+        {
+            get
+            {
+                var hdc = GetDC(IntPtr.Zero);
+                var size = new Size
+                {
+                    Width = GetDeviceCaps(hdc, HORZRES),
+                    Height = GetDeviceCaps(hdc, VERTRES)
+                };
+                ReleaseDC(IntPtr.Zero, hdc);
+                return size;
+            }
+        }
+
+        #endregion
+
+        //根据当前系统真实分辨率和缩放分辨率来计算系统的缩放比例
+        private float GetPositionScaleByRe()
+        {
+            return ((float)(Desktop.Width) / (float)(WorkingArea.Width));
+        }
+
         //键盘钩子
         private KeyboardHookLib _keyboardHook = null;
 
@@ -76,6 +141,9 @@ namespace DotaSkillScreenshot
 
         //timer tick
         int tick = 0;
+
+        //系统缩放级别
+        private float systemZoom = 1f;
 
         Bitmap image = null;
 
@@ -108,11 +176,11 @@ namespace DotaSkillScreenshot
             { 1022, 30 },
             { 1105, 30 },
 
-            { 1454, 30 },
-            { 1537, 30 },
-            { 1620, 30 },
-            { 1703, 30 },
-            { 1786, 30 } };
+            { 1464, 30 },
+            { 1547, 30 },
+            { 1630, 30 },
+            { 1713, 30 },
+            { 1796, 30 } };
 
         //英雄头像矩形框
         private int[] heroIconRect1920x1080 = {
@@ -233,8 +301,8 @@ namespace DotaSkillScreenshot
         private void getHeroSkill(int index)
         {
             ArrayList tmpList = new ArrayList();
-            int x = heroIconCoordinate[index, 0];
-            int y = heroIconCoordinate[index, 1];
+            int x = (int)(heroIconCoordinate[index, 0] * systemZoom);
+            int y = (int)(heroIconCoordinate[index, 1]* systemZoom);
             SetCursorPos(x, y);
             for (int i = 0; i < 4; i++)
             {
@@ -377,6 +445,7 @@ namespace DotaSkillScreenshot
             return true;
         }
 
+        //绘制透明底图
         private Bitmap DrawBlankImage()
         {
             int width = windowRect.Right - windowRect.Left; //窗口的宽度
@@ -386,12 +455,14 @@ namespace DotaSkillScreenshot
             return blankImage;
         }
 
+        //键盘监听回调
         public void OnKeyPress(KeyboardHookLib.HookStruct hookStruct, out bool handle)
         {
             handle = false; //预设不拦截任何键
             Keys key = (Keys)hookStruct.vkCode;
 
             string keyStr = key.ToString();
+            System.Console.WriteLine(keyStr);
             switch (keyStr)
             {
                 case "F5":
@@ -442,11 +513,18 @@ namespace DotaSkillScreenshot
             if (hwnd.ToString() != "0")
             {
                 System.Diagnostics.Debug.WriteLine(hwnd.ToString());
-                GetWindowRect(hwnd, out windowRect);
-                int width = windowRect.Right - windowRect.Left; //窗口的宽度
-                int height = windowRect.Bottom - windowRect.Top; //窗口的高度
+                GetClientRect(hwnd, out windowRect);
+                float zoom = GetPositionScaleByRe();
+                systemZoom = 1f / zoom;
+                Zoom.Text = (zoom*100).ToString() + "%";
+                int width = (int)((windowRect.Right - windowRect.Left)* zoom); //窗口的宽度
+                int height = (int)((windowRect.Bottom - windowRect.Top) * zoom); //窗口的高度
                 int x = windowRect.Left;
                 int y = windowRect.Top;
+                windowRect.Right = (int)(windowRect.Right * zoom);
+                windowRect.Left = (int)(windowRect.Left * zoom);
+                windowRect.Bottom = (int)(windowRect.Bottom * zoom);
+                windowRect.Top = (int)(windowRect.Top * zoom);
                 String resStr = "" + width + "*" + height;
                 DotaStatus.Text = "打开";
                 DotaStatus.ForeColor = Color.Blue;
