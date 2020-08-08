@@ -1,6 +1,6 @@
 ﻿namespace DotaSkillScreenshot
 {
-    partial class Form1
+    partial class DotaSkillScreenshot
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DotaSkillScreenshot));
             this.label1 = new System.Windows.Forms.Label();
             this.DotaStatus = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -110,7 +110,7 @@
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(460, 45);
             this.trackBar1.TabIndex = 1;
-            this.trackBar1.Value = 75;
+            this.trackBar1.Value = 80;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // transparency
@@ -122,7 +122,7 @@
             this.transparency.Name = "transparency";
             this.transparency.Size = new System.Drawing.Size(37, 19);
             this.transparency.TabIndex = 0;
-            this.transparency.Text = "75%";
+            this.transparency.Text = "80%";
             // 
             // label6
             // 
@@ -131,9 +131,9 @@
             this.label6.Location = new System.Drawing.Point(20, 135);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(225, 19);
+            this.label6.Size = new System.Drawing.Size(303, 19);
             this.label6.TabIndex = 0;
-            this.label6.Text = "F5 : 技能截图保存到粘贴板(透明背景)";
+            this.label6.Text = "F5 : 技能截图保存到粘贴板和当前文件夹(透明背景)";
             // 
             // label7
             // 
@@ -153,20 +153,20 @@
             this.label8.Location = new System.Drawing.Point(20, 217);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(468, 57);
+            this.label8.Size = new System.Drawing.Size(475, 95);
             this.label8.TabIndex = 0;
-            this.label8.Text = "Tips : 请使用全屏进行游戏，进入游戏后按下指定快捷键后5秒内不要操作鼠标。\r\n目前仅适配了1920*1080和2560*1440游戏分辨率，如果有特殊分辨率" +
-    "需求，\r\n可以进群联系作者。\r\n";
+            this.label8.Text = "Tips :\r\n请使用全屏或无边框窗口全屏，在游戏界面按下指定快捷键后3秒内不要操作鼠标.\r\n截图完成后切换到直播界面粘贴即可.\r\n目前仅适配了1920*1080" +
+    "和2560*1440游戏分辨率，如果有特殊分辨率需求，可\r\n以进群联系作者.\r\n";
             // 
             // CheckDotaStatusTimer
             // 
             this.CheckDotaStatusTimer.Tick += new System.EventHandler(this.CheckDotaStatusTimer_Tick);
             // 
-            // Form1
+            // DotaSkillScreenshot
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 321);
+            this.ClientSize = new System.Drawing.Size(654, 342);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.DotaStatus);
             this.Controls.Add(this.Resolution);
@@ -178,10 +178,11 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "DotaSkillScreenshot";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OMG技能截图工具(群518615024)";
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
