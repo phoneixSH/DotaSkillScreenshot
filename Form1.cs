@@ -305,6 +305,7 @@ namespace DotaSkillScreenshot
             int x = (int)(heroIconCoordinate[index, 0] * systemZoom);
             int y = (int)(heroIconCoordinate[index, 1]* systemZoom);
             SetCursorPos(x, y);
+            Thread.Sleep(100);
             for (int i = 0; i < 4; i++)
             {
                 x = heroIconCoordinate[index, 0] + heroSkillIconRect[i, 0];
