@@ -189,6 +189,7 @@ namespace DotaSkillScreenshot
             52,     //宽
             30      //高
         };
+
         //75*44
         private int[] heroIconRect2560x1440 = {
             -37,    //头像坐标x距离
@@ -316,7 +317,7 @@ namespace DotaSkillScreenshot
                 }
                 else
                 {
-                    Thread.Sleep(70);
+                    Thread.Sleep(100);
                 }
                 Bitmap screenshot = GetCurrentScreenImageWithRect(x, y, width, height);
                 tmpList.Add(screenshot);
@@ -384,6 +385,30 @@ namespace DotaSkillScreenshot
                         resultImg = DrawImageToImage(resultImg, heroSkillImg, baseX - heroIconRect[2] - (4 - j) * heroSkillIconRect[0, 2],
                                 baseY - ((heroSkillIconRect[0, 3] - heroIconRect[3]) / 2) + heroSkillIconRect[0, 3] * (i - 5), alpha);
                     }
+                }
+            }
+            heroIconList.Clear();
+            heroSkillList.Clear();
+            return resultImg;
+        }
+
+        //OB专用方法
+        private Bitmap MergePictureForViewer(Bitmap resultImg)
+        {
+            float alpha = Convert.ToSingle(trackBar1.Value.ToString()) / 100f;
+            for (int i = 0; i < 10; i++)
+            {
+            //52*30
+            Bitmap heroIconImg = (Bitmap)heroIconList[i];
+            ArrayList currentHeroSkillList = (ArrayList)heroSkillList[i];
+                int baseX = Desktop.Width;
+                int baseY = Desktop.Height/2;
+                resultImg = DrawImageToImage(resultImg, heroIconImg, baseX - heroIconRect[2], baseY + (i - 5) * heroSkillIconRect[0, 3], alpha);
+                for (int j = 0; j < 4; j++)
+                {
+                    Bitmap heroSkillImg = (Bitmap)currentHeroSkillList[j];
+                    resultImg = DrawImageToImage(resultImg, heroSkillImg, baseX - heroIconRect[2] - (4 - j) * heroSkillIconRect[0, 2],
+                            baseY - ((heroSkillIconRect[0, 3] - heroIconRect[3]) / 2) + heroSkillIconRect[0, 3] * (i - 5), alpha);
                 }
             }
             heroIconList.Clear();
@@ -471,14 +496,7 @@ namespace DotaSkillScreenshot
                         Bitmap blankImage = DrawBlankImage();
                         GetAllHeroIcon();
                         Bitmap bitmap = MergePicture(blankImage);
-                        String fileStr = System.DateTime.Now.Ticks.ToString() + ".png";
-                        bitmap.Save(@fileStr);
-                        System.Collections.Specialized.StringCollection files = new System.Collections.Specialized.StringCollection();
-                        String path = System.AppDomain.CurrentDomain.BaseDirectory;
-                        files.Add(@path + fileStr);
-                        Clipboard.SetFileDropList(files);
-                        files.Clear();
-                        bitmap.Dispose();
+                        Clipboard.SetDataObject(bitmap);
                     }
                     break;
                 case "F6":
@@ -491,8 +509,29 @@ namespace DotaSkillScreenshot
                     }
                     break;
                 case "F7":
+                    if (IsGameAlready())
+                    {
+                        Bitmap blankImage = DrawBlankImage();
+                        GetAllHeroIcon();
+                        Bitmap bitmap = MergePicture(blankImage);
+                        String fileStr = System.DateTime.Now.Ticks.ToString() + ".png";
+                        bitmap.Save(@fileStr);
+                        System.Collections.Specialized.StringCollection files = new System.Collections.Specialized.StringCollection();
+                        String path = System.AppDomain.CurrentDomain.BaseDirectory;
+                        files.Add(@path + fileStr);
+                        Clipboard.SetFileDropList(files);
+                        files.Clear();
+                        bitmap.Dispose();
+                    }
                     break;
-                case "F8":
+                case "Oemtilde":
+                    if (IsGameAlready())
+                    {
+                        GetCurrentScreenImage(ref image);
+                        GetAllHeroIcon();
+                        Bitmap bitmap = MergePictureForViewer(image);
+                        Clipboard.SetImage(bitmap);//保存到Clipboard中
+                    }
                     break;
 
                 default:

@@ -144,9 +144,9 @@
             this.label7.Location = new System.Drawing.Point(20, 175);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(225, 19);
+            this.label7.Size = new System.Drawing.Size(263, 19);
             this.label7.TabIndex = 0;
-            this.label7.Text = "F6 : 技能截图保存到粘贴板(游戏背景)";
+            this.label7.Text = "~  : 波浪键技能截图保存到粘贴板(游戏背景)";
             // 
             // label8
             // 
